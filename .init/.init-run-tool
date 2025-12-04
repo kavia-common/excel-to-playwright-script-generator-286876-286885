@@ -1,0 +1,4 @@
+{
+    "command": "CI=true PORT=<port> HOST=<host> npm run dev",
+    "working_directory": "/home/kavia/workspace/code-generation/excel-to-playwright-script-generator-286876-286885/node_cli_excel_parser"
+}

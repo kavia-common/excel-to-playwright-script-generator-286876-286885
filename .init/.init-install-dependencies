@@ -1,0 +1,4 @@
+{
+    "command": "npm install",
+    "working_directory": "/home/kavia/workspace/code-generation/excel-to-playwright-script-generator-286876-286885/node_cli_excel_parser"
+}
