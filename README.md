@@ -1,6 +1,28 @@
 # excel-to-playwright-script-generator-286876-286885
 
-This repository contains a Node.js CLI backend that will parse Excel files and generate Playwright scripts. Playwright is installed and ready to use with helpful scripts.
+This repository contains a modular Node.js automation scaffold designed to parse Excel files and drive Playwright browser automation. It is structured to be reusable across multiple frontends (CLI, server, GUI).
+
+What's included:
+- Core reusable actions and a runner for Playwright
+- A stub Excel parser ready to integrate `xlsx`
+- CLI placeholder with commands (`run`, `generate`)
+- Server placeholder exporting `createServer()` (no auto-start)
+- Playwright config and a sample test
+
+Directory structure (key parts):
+- node_cli_excel_parser/
+  - config/playwright.config.js
+  - scripts/verify_playwright.js
+  - src/
+    - core/
+      - actions/browser.js
+      - runner/runSteps.js
+      - parsers/excelParser.js
+    - frontends/
+      - cli/index.js
+      - server/index.js
+      - gui/README.md
+  - tests/e2e/sample.spec.js
 
 Getting Started
 
@@ -13,12 +35,21 @@ Getting Started
 - Verify Playwright works on this machine:
   npm run pw:verify
 
-Available Scripts
+- Run sample tests (using @playwright/test):
+  npx playwright test
 
-- pw:install: Downloads Playwright browsers and system dependencies (uses npx playwright install --with-deps).
-- pw:verify: Runs a small Node script that launches Chromium in headless mode and opens about:blank.
+- CLI usage help:
+  node src/frontends/cli/index.js --help
+  node src/frontends/cli/index.js run --baseURL https://example.com --headless
 
 Notes
 
-- We intentionally use the core "playwright" package. If you later adopt @playwright/test for testing, you can add it without changing the existing CLI behavior.
-- The prior "pw:doctor" script was removed because the "doctor" command is not available in the Playwright CLI.
+- We intentionally keep browser automation logic in `src/core` so it can be consumed by CLI, server, or GUI without duplication.
+- The sample test uses `@playwright/test` which is included as a devDependency via Playwright’s test runner.
+- The prior "pw:doctor" script was removed because the "doctor" command is not available in recent Playwright CLI versions.
+
+Roadmap
+
+- Wire `xlsx` in `src/core/parsers/excelParser.js` to parse real Excel files into { cases, steps }.
+- Add a server endpoint to trigger runs and accept Excel uploads.
+- Add a GUI (Electron or Tauri) that reuses `src/core`.
